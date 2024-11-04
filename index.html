@@ -9,17 +9,20 @@
     <div class="a"></div>
 </body>
 <script>
-    (async () => {
-        try {
-            const response = await fetch("https://resoft.g-start-up.com/api/v1/test");
-            if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.statusText);
-            }
-            const data = await response.json(); // 응답 본문을 JSON으로 변환
-            console.log(data); // 변환된 데이터 출력
-        } catch (error) {
-            console.error('Fetch error:', error); // 오류 발생 시 출력
+(async () => {
+    try {
+        const response = await fetch("https://resoft.g-start-up.com/api/v1/test");
+        if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.statusText);
         }
-    })();
+        const data = await response.text(); // 문자열로 응답 본문 읽기
+
+        // data를 div.a 요소에 표시
+        const dataDiv = document.querySelector('.a');
+        dataDiv.textContent = data; // div.a에 응답 데이터 설정
+    } catch (error) {
+        console.error('Fetch error:', error); // 오류 발생 시 출력
+    }
+})();
 </script>
 </html>
